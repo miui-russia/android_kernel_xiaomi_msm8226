@@ -19,6 +19,8 @@
 
 #include <trace/events/sched.h>
 
+#include "smpboot.h"
+
 #ifdef CONFIG_SMP
 /* Serializes the updates to cpu_online_mask, cpu_present_mask */
 static DEFINE_MUTEX(cpu_add_remove_lock);
@@ -312,6 +314,10 @@ static int __cpuinit _cpu_up(unsigned int cpu, int tasks_frozen)
 		goto out;
 	}
 
+	ret = smpboot_prepare(cpu);
+	if (ret)
+		goto out;
+
 	ret = __cpu_notify(CPU_UP_PREPARE | mod, hcpu, -1, &nr_calls);
 	if (ret) {
 		nr_calls--;
@@ -321,7 +327,7 @@ static int __cpuinit _cpu_up(unsigned int cpu, int tasks_frozen)
 	}
 
 	/* Arch-specific enabling code. */
-	ret = __cpu_up(cpu);
+	ret = __cpu_up(cpu, idle_thread_get(cpu));
 	if (ret != 0)
 		goto out_notify;
 	BUG_ON(!cpu_online(cpu));
