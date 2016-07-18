@@ -1084,6 +1084,6 @@ source "drivers/input/touchscreen/gt9xx/Kconfig"
 
 config STATE_NOTIFIER
         bool "State Notifier"
-	default n
+	default y
 
 endif
