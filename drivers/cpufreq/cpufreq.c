@@ -366,7 +366,7 @@ void cpufreq_notify_utilization(struct cpufreq_policy *policy,
 	if (policy->util >= MIN_CPU_UTIL_NOTIFY)
 		sysfs_notify(&policy->kobj, NULL, "cpu_utilization");
 
-
+}
 /*********************************************************************
  *                          SYSFS INTERFACE                          *
  *********************************************************************/

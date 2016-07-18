@@ -22,6 +22,7 @@
 #include <asm/byteorder.h>
 #include <asm/simd.h>
 #include <asm/neon.h>
+#include <linux/module.h>
 #include "sha256_glue.h"
 
 asmlinkage void sha256_block_data_order_neon(u32 *digest, const void *data,
