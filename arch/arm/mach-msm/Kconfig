@@ -3060,6 +3060,11 @@ config XIAOMI_ARMANI_DTB
 	 Only include Xiaomi Armani specific DTBs to limit the number that
 	 get built during kernel compilation.
 
+config MSM_SLEEPER
+	bool "CPU hotplug driver"
+	default y
+	help
+	  CPU hotplug driver
 endif
 
 config KERNEL_TEXT_MPU_PROT
